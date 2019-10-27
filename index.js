@@ -1,6 +1,12 @@
 const SlackBot = require('slackbots');
 const axios = require('axios');
 
+// prevent heroku sleep
+var http = require("http");
+  setInterval(function() {
+    http.get("http://sirla-helper-bot.herokuapp.com");
+}, 300000);
+
 const bot = new SlackBot({
     token: `${process.env.BOT_TOKEN}`,
     name: 'SIRLA幫手喵'
