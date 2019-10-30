@@ -52,6 +52,13 @@ slackEvents.on('message', (event) => {
         });
       })();
     });
+  } else if (event.text.includes("喵喵誰最狂")) {
+    (async () => {
+      const result = await web.chat.postMessage({
+        text: `喵~統神最狂沒有之一`,
+        channel: event.channel
+      });
+    })();
   }
 });
 
