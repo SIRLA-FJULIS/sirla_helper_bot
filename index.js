@@ -34,7 +34,7 @@ slackEvents.on('message', (event) => {
     })();
   } else if (event.text.includes("喵喵誰最帥")){
     web.users.list().then( (value) => {
-      let user_name = value.members.find(item => items.id === event.user).profile.display_name;
+      let user_name = value.members.find(item => item.id === event.user).profile.display_name;
       (async () => {
         const result = await web.chat.postMessage({
           text: `喵~${user_name}最帥了`,
@@ -44,7 +44,7 @@ slackEvents.on('message', (event) => {
     });
   } else if (event.text.includes("喵喵誰最美")){
     web.users.list().then( (value) => {
-      let user_name = value.members.find(item => items.id === event.user).profile.display_name;
+      let user_name = value.members.find(item => item.id === event.user).profile.display_name;
       (async () => {
         const result = await web.chat.postMessage({
           text: `喵~${user_name}最美了`,
