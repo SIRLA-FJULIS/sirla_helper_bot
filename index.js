@@ -12,10 +12,43 @@ const web = new WebClient(token);
 // Read the port from the environment variables, fallback to 3000 default.
 const port = process.env.PORT || 3000;
 
+let words = ['喵喵喵喵喵喵喵貓喵喵喵喵喵喵', '櫻櫻沒袋子，沒事叫我講幹話做啥', '你有聽過無限貓咪理論嗎，貓咪有一天也能打出曠世巨作', '幹話。', '喵喵累了，喵喵不講幹話', '喵', '喵喵喵', '喵喵~喵喵喵~~咪邀~~~'];
+
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
 slackEvents.on('message', (event) => {
   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-
+  if (event.text.includes("喵喵講話")){
+    (async () => {
+      const result = await web.chat.postMessage({
+        text: '話。',
+        channel: event.channel,
+      });
+    })();
+  } else if (event.text.includes("喵喵講幹話")){
+    (async () => {
+      let response = words[Math.floor(Math.random() * words.length)];
+      const result = await web.chat.postMessage({
+        text: response,
+        channel: event.channel,
+      });
+    })();
+  } else if (event.text.includes("喵喵誰最帥")){
+    (async () => {
+      let user_name = users.list.members.find(items => items.id === event.user).name;
+      const result = await web.chat.postMessage({
+        text: `喵~${user_name}最帥了`,
+        channel: event.channel,
+      });
+    })();
+  } else if (event.text.includes("喵喵誰最美")){
+    (async () => {
+      let user_name = users.list.members.find(items => items.id === event.user).name;
+      const result = await web.chat.postMessage({
+        text: `喵~${user_name}最美了`,
+        channel: event.channel,
+      });
+    })();
+  }
 });
 
 slackEvents.on('error', (error) => {
