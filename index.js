@@ -14,6 +14,10 @@ slackEvents.on('message', (event) => {
     console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
 });
 
+slackEvents.on('error', (error) => {
+  console.log(error.name); // TypeError
+});
+
 (async () => {
   // Start the built-in server
   const server = await slackEvents.start(port);
