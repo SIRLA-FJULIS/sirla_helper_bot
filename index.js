@@ -34,7 +34,8 @@ slackEvents.on('message', (event) => {
     })();
   } else if (event.text.includes("喵喵誰最帥")){
     (async () => {
-      let user_name = web.users.list().members.find(items => items.id === event.user).name;
+      let user_name = web.users.list();
+      console.log(user_name);
       const result = await web.chat.postMessage({
         text: `喵~${user_name}最帥了`,
         channel: event.channel,
