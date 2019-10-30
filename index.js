@@ -33,22 +33,25 @@ slackEvents.on('message', (event) => {
       });
     })();
   } else if (event.text.includes("喵喵誰最帥")){
-    (async () => {
-      let user_name = web.users.list();
-      console.log(user_name);
-      const result = await web.chat.postMessage({
-        text: `喵~${user_name}最帥了`,
-        channel: event.channel,
-      });
-    })();
+    web.users.list().then( (value) => {
+      let user_name = value.members.find(item => items.id === event.user).profile.display_name;
+      (async () => {
+        const result = await web.chat.postMessage({
+          text: `喵~${user_name}最帥了`,
+          channel: event.channel,
+        });
+      })();
+    });
   } else if (event.text.includes("喵喵誰最美")){
-    (async () => {
-      let user_name = web.users.list().members.find(items => items.id === event.user).name;
-      const result = await web.chat.postMessage({
-        text: `喵~${user_name}最美了`,
-        channel: event.channel,
-      });
-    })();
+    web.users.list().then( (value) => {
+      let user_name = value.members.find(item => items.id === event.user).profile.display_name;
+      (async () => {
+        const result = await web.chat.postMessage({
+          text: `喵~${user_name}最美了`,
+          channel: event.channel,
+        });
+      })();
+    });
   }
 });
 
