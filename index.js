@@ -15,13 +15,7 @@ const port = process.env.PORT || 3000;
 // Attach listeners to events by Slack Event "type". See: https://api.slack.com/events/message.im
 slackEvents.on('message', (event) => {
   console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-  (async () => {
-    const result = await web.chat.postMessage({
-      text: 'Hello world!',
-      channel: event.channel,
-    });
-    console.log(`Successfully send message ${result.ts} in conversation ${conversationId}`);
-  })();
+
 });
 
 slackEvents.on('error', (error) => {
