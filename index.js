@@ -70,6 +70,7 @@ slackEvents.on('message', (event) => {
     })();
   } else if (event.text.match(/喵喵分\d+組/)) {
     (async () => {
+      let command = event.text.split(" ")[0];
       let name_list = event.text.split(" ").slice(1);
       function shuffle(array){
         for(let i = array.length - 1; i > 0; i--){
@@ -78,8 +79,9 @@ slackEvents.on('message', (event) => {
         }
       }
       shuffle(name_list);
+      let team_num = command.match(/\d+/)[0];
       let teams = [];
-      for (let i = 1; i <= name_list.length; i++) {
+      for (let i = 1; i <= team_num; i++) {
         teams.push({id: i, members: []});
       }
       for (let i = 0; i < name_list.length; i++) {
