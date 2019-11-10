@@ -61,7 +61,7 @@ slackEvents.on('message', (event) => {
     })();
   } else if (event.text.includes("喵喵亂數")) {
     (async () => {
-      let num_range = event.text.match(/\d+[-~]\d+/).split("-");
+      let num_range = event.text.match(/\d+[-]\d+/)[0].split("-");
       let response = Math.floor(Math.random() * (Number(num_range[1]) - Number(num_range[0]) + 1)) + Number(num_range[0]);
       const result = await web.chat.postMessage({
         text: `喵~ 今天的幸運數字是${response}!`,
