@@ -91,6 +91,7 @@ slackEvents.on('message', (event) => {
       for (team of teams) {
         grouping_result.push(`第${team.id}組: ${team.members.join("、")}`)
       }
+      shuffle(grouping_result);
       const result = await web.chat.postMessage({
         text: `${grouping_result.join("\n")}`,
         channel: event.channel
