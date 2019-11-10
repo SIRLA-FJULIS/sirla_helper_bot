@@ -85,12 +85,12 @@ slackEvents.on('message', (event) => {
       for (let i = 0; i < name_list.length; i++) {
         teams[i % num].members.push(name_list[i]);
       }
-      let result = [];
+      let grouping_result = [];
       for (team of teams) {
-        result.push(`第${team.id}組: ${team.members.join("、")}`)
+        grouping_result.push(`第${team.id}組: ${team.members.join("、")}`)
       }
       const result = await web.chat.postMessage({
-        text: `${result.join("\n")}`,
+        text: `${grouping_result.join("\n")}`,
         channel: event.channel
       });
     })();
