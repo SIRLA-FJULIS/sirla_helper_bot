@@ -82,16 +82,16 @@ slackEvents.on('message', (event) => {
       let team_num = command.match(/\d+/)[0];
       let teams = [];
       for (let i = 1; i <= team_num; i++) {
-        teams.push({id: i, members: []});
+        teams.push([]);
       }
       for (let i = 0; i < name_list.length; i++) {
         teams[i % team_num].members.push(name_list[i]);
       }
+      shuffle(teams);
       let grouping_result = [];
-      for (team of teams) {
-        grouping_result.push(`第${team.id}組: ${team.members.join("、")}`)
+      for ([id, team] of teams.entries()) {
+        grouping_result.push(`第${id + 1}組: ${team.join("、")}`)
       }
-      shuffle(grouping_result);
       const result = await web.chat.postMessage({
         text: `${grouping_result.join("\n")}`,
         channel: event.channel
