@@ -83,7 +83,7 @@ slackEvents.on('message', (event) => {
         teams.push({id: i, members: []});
       }
       for (let i = 0; i < name_list.length; i++) {
-        teams[i % name_list.length;].members.push(name_list[i]);
+        teams[i % name_list.length].members.push(name_list[i]);
       }
       let grouping_result = [];
       for (team of teams) {
