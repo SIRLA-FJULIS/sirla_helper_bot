@@ -68,6 +68,32 @@ slackEvents.on('message', (event) => {
         channel: event.channel
       });
     })();
+  } else if (event.text.match(/喵喵分\d+組/)) {
+    (async () => {
+      let name_list = event.text.split(" ").slice(1);
+      function shuffle(array){
+        for(let i = array.length - 1; i > 0; i--){
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+      shuffle(name_list);
+      let teams = [];
+      for (let i = 1; i <= num; i++) {
+        teams.push({id: i, members: []});
+      }
+      for (let i = 0; i < name_list.length; i++) {
+        teams[i % num].members.push(name_list[i]);
+      }
+      let result = [];
+      for (team of teams) {
+        result.push(`第${team.id}組: ${team.members.join("、")}`)
+      }
+      const result = await web.chat.postMessage({
+        text: `${result.join("\n")}`,
+        channel: event.channel
+      });
+    })();
   }
 });
 
