@@ -85,7 +85,7 @@ slackEvents.on('message', (event) => {
         teams.push([]);
       }
       for (let i = 0; i < name_list.length; i++) {
-        teams[i % team_num].members.push(name_list[i]);
+        teams[i % team_num].push(name_list[i]);
       }
       shuffle(teams);
       let grouping_result = [];
